@@ -14,39 +14,28 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 引数を省略するクロージャのパターン
-        let division = { $0 * 40 }
-        print(division(20))
-        
-        let checker = { price in
-            if price > 1000 {
-                print("高価")
-            } else {
-                print("そうでもない")
+        calc1(a: 1, b: 1) { c in
+            calc2(c: c, d: 1) { e in
+                calc3(e: e) {
+                }
             }
         }
-        
-        
-        //年齢から、成人済みかのメッセージを返す
-        let ageCheckMessage = { age in
-            if age < 20 {
-                print("ha")
-            }
-        }
-         
-        //クロージャを実行する
-        print(ageCheckMessage(26))
-        
-        print(checker(200))
-//        // kがコールバック
-//        let sum = { (x: Int, y: Int, k: (Int) -> Int) in
-//            return k(x + y)
-//        }
-//
-////        var num = sum(1, sum(2, 3))
-//
-//        label.text = String(num)
     }
-
+    
+    private func calc1(a: Int, b: Int, completion: (Int) -> Int) -> Int {
+        let c = a + b
+        completion(c)
+//        return c
+    }
+    
+    private func calc2(c: Int, d: Int, operation: @escaping() -> Int) -> Int {
+        let e = c + d
+        return e
+    }
+    
+    private func calc3(e: Int) -> Int {
+        let f = e * 10
+        return f
+    }
 }
 
