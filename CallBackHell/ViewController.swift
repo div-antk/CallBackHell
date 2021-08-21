@@ -16,26 +16,27 @@ class ViewController: UIViewController {
         
         calc1(a: 1, b: 1) { c in
             calc2(c: c, d: 1) { e in
-                calc3(e: e) {
+                calc3(e: e) { f in
+                    print(f)
+                    label.text = String(f)
                 }
             }
         }
     }
     
-    private func calc1(a: Int, b: Int, completion: (Int) -> Int) -> Int {
+    private func calc1(a: Int, b: Int, completion: (Int) -> ()) {
         let c = a + b
         completion(c)
-//        return c
     }
     
-    private func calc2(c: Int, d: Int, operation: @escaping() -> Int) -> Int {
+    private func calc2(c: Int, d: Int, completion: (Int) -> ()) {
         let e = c + d
-        return e
+        completion(e)
     }
     
-    private func calc3(e: Int) -> Int {
+    private func calc3(e: Int, completion: (Int) -> ()) {
         let f = e * 10
-        return f
+        completion(f)
     }
 }
 
